@@ -1,0 +1,16 @@
+: main
+	int textindex 0
+;
+
+: phase_player_init
+	ClearText
+;
+
+: phase_puyo_main
+	call main
+	while
+		SetText 0 textindex 0 0
+		wait 30
+		add textindex textindex 1
+	loop
+;

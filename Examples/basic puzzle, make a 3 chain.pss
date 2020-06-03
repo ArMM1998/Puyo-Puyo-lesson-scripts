@@ -1,0 +1,86 @@
+
+: main
+	int dead 0
+	int current_turn 1
+	int chain 0
+	int win 0
+;
+
+: win
+	ExitTutorial
+	while
+	wait 1
+	loop
+;
+
+: phase_landing
+	add current_turn current_turn 1
+;
+
+: win_check
+	set chain GetChainCount 
+	if chain = 3
+		WaitTurnEnd
+		call win
+	endif
+;
+
+
+: fail
+SetFailIf
+ExitTutorial
+while
+	wait 1
+loop
+;
+
+: check_dead
+set dead ChkFail
+if dead = 1
+	call fail
+endif
+
+if current_turn = 4
+WaitTurnEnd
+call fail
+endif
+;
+
+: phase_player_init
+
+SetAllClear 0
+
+SetPuyoColors	6
+4 3 3 3 3 4
+
+SetPuyoPattern	3
+512
+512
+512
+
+;
+
+: phase_puyo_main
+
+call main
+
+SetFallField 
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+4 0 3 0 0 0
+4 4 6 0 0 0
+3 3 3 0 0 0
+
+while
+	call win_check
+	call check_dead
+	wait 1
+loop
+;

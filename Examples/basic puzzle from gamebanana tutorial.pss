@@ -1,0 +1,66 @@
+: main
+	int current_piece 1
+	int chain 0
+	int dead 0
+;
+
+: check_dead
+	set dead ChkFail
+		if dead = 1
+			SetFailIf
+			ExitTutorial
+		endif
+;
+
+: check_chain
+	set chain GetChainCount
+	if chain = 3
+		WaitTurnEnd
+		ExitTutorial
+		while
+		wait 1
+		loop
+	endif
+;
+
+: phase_landing
+	add current_piece current_piece 1
+;
+
+: checkturn
+	if current_piece = 3
+		SetFailIf
+	ExitTutorial
+	endif
+;
+
+: phase_player_init
+	SetAllClear 0
+	SetPuyoColors 4
+	3 3 3 3
+	SetPuyoPattern 2
+	512 512
+;
+
+: phase_puyo_main
+	call main
+	SetFallField 
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 3
+	0 0 0 0 1 3
+	0 0 0 0 3 1
+	0 0 0 0 1 3
+	0 0 0 0 1 3
+	while
+		call check_chain
+		call checkturn
+		call check_dead
+		wait 1
+	loop
+;
