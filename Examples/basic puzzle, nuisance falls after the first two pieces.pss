@@ -1,0 +1,70 @@
+: main	
+	int dead 0
+	int turn 0
+;
+
+
+: phase_fall_start
+	add turn turn 1
+	if turn = 2
+		SetOjamaTime 0 18
+	endif
+
+	
+	if turn = 9
+		BreakField
+		SetFailIf
+		ExitTutorial
+	endif
+;
+
+
+: phase_chain_end
+	int chain 0
+	set chain GetChainCount
+	if chain > 4
+		BreakField
+		SetClearIf
+		ExitTutorial
+	endif
+;
+
+
+: phase_player_init
+	SetFallLevel -69
+	SetPuyoColors 16
+	2 2 2 3 3 2 3 4 1 1 1 3 4 4 4 3 
+	SetPuyoPattern 8
+	512 512 512 512 512 512 512 512
+	SetFever 0
+	SetColors 3
+	call main
+;
+
+: phase_puyo_main
+	call main
+	
+	SetFallField
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 0 0 0
+	0 0 0 3 3 1
+	0 0 4 3 1 1
+	
+	while
+		set dead ChkFail
+		if dead = 1
+			BreakField
+			SetFailIf
+			ExitTutorial
+		endif
+		wait 1
+	loop
+;

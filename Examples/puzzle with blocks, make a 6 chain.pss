@@ -1,0 +1,81 @@
+: main
+	int turn_count 1
+	int dead 0
+	int chain 0
+; 
+
+: check_dead
+	set dead ChkFail
+	if dead != 0
+		SetFailIf
+		ExitTutorial
+		while
+			wait 1
+		loop
+	endif
+;
+
+: phase_landing
+	add turn_count turn_count 1
+;
+
+: check_turn
+	if turn_count = 12
+		WaitTurnEnd
+		SetFailIf
+		ExitTutorial
+		while
+			wait 1
+		loop
+	endif
+;
+
+: check_win
+	set chain GetChainCount
+	if chain > 5
+		WaitTurnEnd
+		SetClearIf
+		ExitTutorial
+		while
+			wait 1
+		loop
+	endif
+;
+
+: phase_player_init
+	SetFallLevel -20
+	SetAllClear 0
+	SetPuyoColors 22
+	4 1 1 4 2 2 2 3 3 2 3 4 2 2 1 1 1 2 1 2 3 3
+	SetPuyoPattern 11
+	512 512 512 512 512 512 512 512 512 512 512
+;
+
+
+
+: phase_puyo_main
+		call main
+		
+		SetField
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 0 0 0 0
+		0 0 20 20 20 0
+		6 6 0 0 0 0
+		1 1 4 0 0 0
+
+		
+	while
+		call check_win
+		call check_turn
+		call check_dead
+		wait 1
+	loop
+;

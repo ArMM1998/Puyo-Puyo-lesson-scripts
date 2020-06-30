@@ -10,3 +10,6 @@ If you want to put these scripts into your game and run them, change the file na
 For example, "try00000.pss" accounts for the very first "problem"
 
 If you want to edit any of these scripts, simply open the .pss file on any text editor.
+
+# Notepad++
+Notepad++ is recommended for editing/creating scripts, for the sake of readability, i have creared a custom programming language for Notepad++. To use it, in Notepad++ you must go to Language > Define Language > Import and select the "PuyoLanguageNotepad++.xml" included in the project.
