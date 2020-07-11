@@ -13,3 +13,8 @@ If you want to edit any of these scripts, simply open the .pss file on any text 
 
 # Notepad++
 Notepad++ is recommended for editing/creating scripts, for the sake of readability, i have creared a custom programming language for Notepad++. To use it, in Notepad++ you must go to Language > Define Language > Import and select the "PuyoLanguageNotepad++.xml" included in the project.
+
+# Tools
+* Puyo Field - It's a tool to help you build the field like you would on the puyo nexus chain simulator, it then generates the field data for you to paste into your script. It can also read field data from other puzzles.  
+
+For now, Puyo Field is the only tool available, but i plan on making more for creating sets of puyo colors, shapes and even a basic puzzle builder
